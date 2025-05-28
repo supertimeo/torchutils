@@ -1,10 +1,2 @@
 include README.md
 include LICENSE
-include pyproject.toml
-
-# Inclure tous les fichiers Python récursivement
-global-include *.py
-
-# Inclure les fichiers de données si nécessaire
-# include torchutils/*.json
-# include torchutils/*.yaml

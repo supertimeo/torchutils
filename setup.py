@@ -1,18 +1,10 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
-
 setup(
     name="torchutils",
     version="0.1.0",
-    author="supertimeo",
-    author_email="fort.timeo38@gmail.com",
-    description="A collection of useful utilities for PyTorch projects",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    url="https://github.com/supertimeo/torchutils",
-    packages=find_packages(include=['torchutils', 'torchutils.*']),
+    packages=find_packages(where="."),
+    package_dir={"": "."},
     include_package_data=True,
     install_requires=[
         "torch>=2.0.0",
@@ -32,14 +24,9 @@ setup(
         "pydantic>=2.5.2",
         "torchsummary>=1.0.0",
     ],
-    python_requires=">=3.8",
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
+    entry_points={
+        'console_scripts': [
+            'torchutils = torchutils.__main__:main',
+        ],
+    },
 )

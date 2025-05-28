@@ -53,10 +53,6 @@ dev = [
     "twine>=6.1.0",
 ]
 
-[tool.setuptools]
-package-dir = { "" = "." }
-packages = ["torchutils", "torchutils.*"]
-include-package-data = true
 
 [tool.pdm]
 distribution = true
