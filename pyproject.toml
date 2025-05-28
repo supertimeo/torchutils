@@ -19,7 +19,6 @@ classifiers = [
 requires-python = ">=3.8"
 description = "A collection of useful utilities for PyTorch projects"
 
-# Dependencies
 dependencies = [
     "torch>=2.0.0",
     "torchvision>=0.15.0",
@@ -40,9 +39,9 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/supertimeo/torchutils"
-"Bug Reports" = "https://github.com/supertimeo/torchutils/issues"
-"Source" = "https://github.com/supertimeo/torchutils"
+Homepage = "https://github.com/supertimeo/torchutils"
+BugReports = "https://github.com/supertimeo/torchutils/issues"
+Source = "https://github.com/supertimeo/torchutils"
 
 [project.optional-dependencies]
 dev = [
@@ -54,27 +53,18 @@ dev = [
 ]
 
 [tool.setuptools]
-package_dir = { "" = "." }
-packages = find:
-include_package_data = true
+package-dir = { "" = "." }
+packages = ["torchutils"]
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["torchutils", "torchutils/*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.py"]
 
 [tool.pdm]
 distribution = true
-
-[build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-packages = ["torchutils"]
-package-dir = { "" = "." }
 
 [project.scripts]
 torchutils = "torchutils.__main__:main"
