@@ -4,6 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "torchutils"
+dynamic = ["version"]
 authors = [
     {name = "supertimeo", email = "fort.timeo38@gmail.com"},
 ]
