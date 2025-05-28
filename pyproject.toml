@@ -55,7 +55,7 @@ dev = [
 
 [tool.setuptools]
 package-dir = { "" = "." }
-packages = ["torchutils"]
+packages = ["torchutils", "torchutils.*"]
 include-package-data = true
 
 [tool.pdm]
