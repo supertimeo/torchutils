@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "torchutils"
 authors = [
@@ -12,8 +16,10 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
 ]
-requires-python = "==3.11.*"
+requires-python = ">=3.8"
+description = "A collection of useful utilities for PyTorch projects"
 
+# Dependencies
 dependencies = [
     "torch>=2.0.0",
     "torchvision>=0.15.0",
@@ -32,8 +38,6 @@ dependencies = [
     "pydantic>=2.5.2",
     "torchsummary>=1.0.0",
 ]
-version = "0.1.0"
-description = "Default template for PDM package"
 
 [project.urls]
 "Homepage" = "https://github.com/supertimeo/torchutils"
@@ -48,6 +52,18 @@ dev = [
     "mypy",
     "twine>=6.1.0",
 ]
+
+[tool.setuptools]
+package_dir = { "" = "." }
+packages = find:
+include_package_data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["torchutils", "torchutils/*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.py"]
 
 [tool.pdm]
 distribution = true
