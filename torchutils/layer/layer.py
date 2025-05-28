@@ -93,7 +93,7 @@ def make_layer(block, in_channels, out_channels, blocks, stride=1):
         layers = []
         layers.append(block(in_channels, out_channels, stride=stride, downsample=downsample))
         for _ in range(1, blocks):
-            layers.append(ResidualBlock(out_channels, out_channels))
+            layers.append(block(out_channels, out_channels))
 
         return nn.Sequential(*layers)
 
@@ -104,7 +104,7 @@ class LearnableRandomNoise(nn.Module):
         self.coef = nn.Parameter(torch.zeros(channels))
     def forward(self, x):
         coef_scale = torch.clamp(self.coef, min=0, max=1).view(1, -1, 1, 1)
-        return x + (torch.randn_like(x, device=x.device, dtype=x.dtype, min_val=0, max_val=255) * coef_scale)
+        return x + (torch.randn_like(x, device=x.device, dtype=x.dtype) * coef_scale)
 
 
 class LearnDepthwiseConv(nn.Module):
