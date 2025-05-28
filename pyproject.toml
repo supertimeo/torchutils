@@ -1,0 +1,64 @@
+[project]
+name = "torchutils"
+authors = [
+    {name = "supertimeo", email = "fort.timeo38@gmail.com"},
+]
+readme = "README.md"
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+requires-python = "==3.12.*"
+
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "torchaudio>=2.0.0",
+    "pytorch-lightning>=2.0.0",
+    "transformers>=4.0.0",
+    "sentence-transformers>=2.0.0",
+    "torchtext>=0.15.0",
+    "torchmetrics>=1.0.0",
+    "fastai>=2.7.0",
+    "scikit-learn>=1.3.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "kornia>=0.8.1",
+    "pycocotools>=2.0.4",
+    "pydantic>=2.5.2",
+    "torchsummary>=1.0.0",
+]
+version = "0.1.0"
+description = "Default template for PDM package"
+
+[project.urls]
+"Homepage" = "https://github.com/supertimeo/torchutils"
+"Bug Reports" = "https://github.com/supertimeo/torchutils/issues"
+"Source" = "https://github.com/supertimeo/torchutils"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort",
+    "mypy",
+    "twine>=6.1.0",
+]
+
+[tool.pdm]
+distribution = true
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["torchutils"]
+package-dir = { "" = "." }
+
+[project.scripts]
+torchutils = "torchutils.__main__:main"
