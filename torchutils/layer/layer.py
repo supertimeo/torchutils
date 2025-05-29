@@ -58,26 +58,44 @@ class CBAM(nn.Module):
 
 
 class ResidualBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size=3, stride=1, padding=1, downsample=None):
+    def __init__(self, in_channels, out_channels, stride=1, downsample=None):
         super(ResidualBlock, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)
-        self.bn1 = nn.BatchNorm2d(out_channels)
-        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size, 1, padding)
-        self.bn2 = nn.BatchNorm2d(out_channels)
+        self.expansion = 4
+        bottleneck_channels = out_channels // self.expansion
+
+        # 1x1 conv: réduction des canaux
+        self.conv1 = nn.Conv2d(in_channels, bottleneck_channels, kernel_size=1, stride=1, padding=0, bias=False)
+        self.bn1 = nn.BatchNorm2d(bottleneck_channels)
+
+        # 3x3 conv: transformation principale (avec stride)
+        self.conv2 = nn.Conv2d(bottleneck_channels, bottleneck_channels, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(bottleneck_channels)
+
+        # 1x1 conv: expansion
+        self.conv3 = nn.Conv2d(bottleneck_channels, out_channels, kernel_size=1, stride=1, padding=0, bias=False)
+        self.bn3 = nn.BatchNorm2d(out_channels)
+
         self.relu = nn.ReLU(inplace=True)
         self.downsample = downsample
 
     def forward(self, x):
         identity = x
+
         if self.downsample is not None:
             identity = self.downsample(x)
+
         out = self.conv1(x)
         out = self.bn1(out)
         out = self.relu(out)
+
         out = self.conv2(out)
         out = self.bn2(out)
+        out = self.relu(out)
 
-        out += identity  # Ajout de la connexion résiduelle
+        out = self.conv3(out)
+        out = self.bn3(out)
+
+        out += identity
         out = self.relu(out)
         return out
 
